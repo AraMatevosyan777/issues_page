@@ -1,4 +1,4 @@
-import { ADD_ISSUE, SHOW_DRAWER, ADD_LABEL, DELETE_LABEL, ADD_COMMENT, IS_OPEN } from "./actions"
+import { ADD_ISSUE, SHOW_DRAWER, ADD_LABEL, DELETE_LABEL, ADD_COMMENT, IS_OPEN, DELETE_ISSUE } from "./actions"
 
 const initialState = {
     issues: [ {
@@ -118,6 +118,12 @@ export const issuesReducer = (state=initialState, action) => {
                     }
                  }return issue
              })
+         }
+     case DELETE_ISSUE:
+         debugger
+         return{
+             ...state,
+             issues: state.issues.filter(issue=> issue.id !== action.id)
          }
     default: return state
  }

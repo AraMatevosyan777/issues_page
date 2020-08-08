@@ -36,3 +36,14 @@ body {
     justify-content: space-between;
     align-items: center;
 }
+.deleteBtn{
+    margin-right: 10px;
+    border: 1px solid #ccc;
+    padding: 5px;
+    transition: background .2s linear, color .2s linear;
+}
+.deleteBtn:hover{
+    background-color: rgb(212, 11, 11);
+    color: #fff;
+    border: 1px solid #fff;
+}
