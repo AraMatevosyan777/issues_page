@@ -1,49 +1,46 @@
 @import '~antd/dist/antd.css';
 
 body {
-    margin: 0;
-    background-color: #f0f2f5;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
-      "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
-      sans-serif;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;  
-  }
-  
-  *,
-  *::before,
-  *::after{
-      box-sizing: border-box;
-  }
-  h1,h2,h3,h4,h5,h6, p, ul, li{
-      margin: 0;
-      padding: 0;
-  }
-  .layout{
-    width: 100%!important;
+  margin: 0;
+  background-color: #f0f2f5;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
-.content{
-    width: 100%;
-    margin-top: 20px;
-    display: flex;
-    justify-content: center;
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
 }
-.container{
-    width: 90%;
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+ul,
+li {
+  margin: 0;
+  padding: 0;
 }
-.df{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+.layout {
+  width: 100% !important;
 }
-.deleteBtn{
-    margin-right: 10px;
-    border: 1px solid #ccc;
-    padding: 5px;
-    transition: background .2s linear, color .2s linear;
+.content {
+  width: 100%;
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
 }
-.deleteBtn:hover{
-    background-color: rgb(212, 11, 11);
-    color: #fff;
-    border: 1px solid #fff;
+.container {
+  width: 90%;
+}
+.df {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
