@@ -1,21 +1,21 @@
-import React from 'react'
-import m from './common.module.css'
+import React from 'react';
+import m from './common.module.css';
 import PropTypes from 'prop-types';
 import { labelType } from '../../types';
 
-const Label = ({label}) => {
-    const bgc = {
-        backgroundColor : label.bgc
-    }
+const Label = ({ label }) => {
+  const bgc = {
+    backgroundColor: label.bgc,
+  };
   return (
-      <span  className={m.label} style={bgc}>
-        {label.title}
-      </span>
-  )
-}
-
-Label.propTypes = {
-  label: PropTypes.shape(labelType)
+    <span className={m.label} style={bgc}>
+      {label.title}
+    </span>
+  );
 };
 
-export default Label
+Label.propTypes = {
+  label: PropTypes.shape(labelType),
+};
+
+export default Label;
