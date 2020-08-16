@@ -1,4 +1,4 @@
-import {ADD_LABEL} from './actions.js'
+import {ADD_LABEL, DELETE_LABEL} from './actions.js'
 
 const initialState = {
     labels:[
@@ -27,6 +27,11 @@ export const labelsReducer = (state=initialState, action) => {
             return{
                 ...state,
                 labels: [...state.labels, action.label]
+            }
+        case DELETE_LABEL:
+            return{
+                ...state,
+                labels: state.labels.filter(label => label.id !== action.id)
             }
         default: return state
     }

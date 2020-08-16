@@ -5,7 +5,7 @@ import IssueHeader from '../../components/issue/IssueHeader'
 import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { getIssue } from '../../redux/issue/thunk'
-import { addLabel, deleteLabel, addComment, setIsopen } from '../../redux/issues/actions'
+import { addLabel, deleteLabel, addComment, setIsopen, deleteIssue } from '../../redux/issues/actions'
 import Comments from '../../components/issue/Comments'
 import IssueCard from '../../components/issue/IssueCard'
 import LabelsCard from '../../components/issue/LabelsCard'
@@ -44,6 +44,10 @@ class IssuePage extends Component {
     this.props.setIsopen(this.props.issue.id, this.props.issue.isOpen)
     this.refreshPage()
   }
+  onDelete = () => {
+    this.props.deleteIssue(this.props.issue.id)
+    this.props.history.push('/issues')
+  }
   render() {
     if(this.props.error){
       this.props.history.push('/issues')
@@ -52,7 +56,7 @@ class IssuePage extends Component {
     
     return (
       <div>
-        <IssueHeader />
+        <IssueHeader onDelete={this.onDelete}/>
         <div className={m.body}>
           <IssueCard onSwitch={this.onSwitch} issue={issue}/>
           <LabelsCard issue={issue} onLabelDelete={this.onLabelDelete} selectLabel={this.selectLabel}/>
@@ -78,4 +82,4 @@ const mapStateToProps = (state) => ({
   error: state.issue.error,
 })
 
-export default withRouter(connect(mapStateToProps, { getIssue, addLabel, deleteLabel, addComment, setIsopen })(IssuePage))
+export default withRouter(connect(mapStateToProps, { getIssue, addLabel, deleteLabel, addComment, setIsopen, deleteIssue })(IssuePage))
