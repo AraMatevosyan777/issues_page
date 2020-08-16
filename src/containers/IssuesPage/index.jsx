@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
-import IssuesTable from '../../components/issues/IssuesTable';
-import IssuesHeader from '../../components/issues/IssuesHeader';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import { RadiusUprightOutlined } from '@ant-design/icons';
 import { notification } from 'antd';
-import { connect } from 'react-redux';
+import IssuesTable from '../../components/issues/IssuesTable';
+import IssuesHeader from '../../components/issues/IssuesHeader';
 import { setError } from '../../redux/issue/actions';
-import PropTypes from 'prop-types';
+import { withRouter } from 'react-router-dom';
+import { getIssues } from '../../redux/issues/thunk';
 
 class IssuesPage extends Component {
   openNotification = () => {
@@ -14,8 +16,22 @@ class IssuesPage extends Component {
     });
     this.props.setError(null);
   };
+  refreshIssues = () => {
+    const label = this.props.match.params.label;
+    this.props.getIssues(label);
+  };
   componentDidMount() {
+    this.refreshIssues();
     this.props.error && this.openNotification();
+  }
+
+  componentDidUpdate(prevProps) {
+    if (
+      prevProps.match.params.label &&
+      this.props.match.params.label === undefined
+    ) {
+      this.refreshIssues();
+    }
   }
 
   render() {
@@ -37,4 +53,6 @@ const mapStateToProps = (state) => ({
   error: state.issue.error,
 });
 
-export default connect(mapStateToProps, { setError })(IssuesPage);
+export default withRouter(
+  connect(mapStateToProps, { setError, getIssues })(IssuesPage)
+);

@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
-import m from './index.module.css';
 import { message } from 'antd';
-import IssueHeader from '../../components/issue/IssueHeader';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import getIssue from '../../redux/issue/thunk';
 import {
   addLabel,
@@ -16,26 +15,28 @@ import {
 import Comments from '../../components/issue/Comments';
 import IssueCard from '../../components/issue/IssueCard';
 import LabelsCard from '../../components/issue/LabelsCard';
-import PropTypes from 'prop-types';
 import { issueType } from '../../types';
+import IssueHeader from '../../components/issue/IssueHeader';
+import m from './index.module.css';
 
 class IssuePage extends Component {
+  componentDidMount() {
+    this.refreshPage();
+  }
+
   refreshPage = () => {
-    const id = this.props.match.params.id;
+    const { id } = this.props.match.params;
     if (!id) {
       this.props.history.push('./issues');
     }
     this.props.getIssue(id);
   };
 
-  componentDidMount() {
-    this.refreshPage();
-  }
-
   selectLabel = (id, label) => {
     this.props.addLabel(id, label);
     this.refreshPage();
   };
+
   addComment = (id, comment) => {
     this.props.addComment(id, comment);
     this.refreshPage();
@@ -46,6 +47,7 @@ class IssuePage extends Component {
     this.refreshPage();
     message.info('Label deleted');
   };
+
   onSwitch = () => {
     this.props.setIsopen(this.props.issue.id, this.props.issue.isOpen);
     this.refreshPage();
@@ -55,6 +57,7 @@ class IssuePage extends Component {
     this.props.deleteIssue(this.props.issue.id);
     this.props.history.push('/issues');
   };
+
   onEdit = (issue) => {
     this.props.editIssue(issue);
   };
@@ -96,6 +99,7 @@ IssuePage.propTypes = {
   editIssue: PropTypes.func,
   addComment: PropTypes.func,
   setIsopen: PropTypes.func,
+  id: PropTypes.string,
 };
 
 const mapStateToProps = (state) => ({

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { NavLink } from 'react-router-dom';
 import Label from '../common/Label';
 import { ExclamationCircleOutlined } from '@ant-design/icons';
 import { labelType, issueType } from '../../types';
@@ -6,6 +7,7 @@ import PropTypes from 'prop-types';
 import { DeleteOutlined } from '@ant-design/icons';
 import { Tooltip, Popconfirm, Input } from 'antd';
 import EditButton from '../common/EditButton';
+import { issuesData } from '../../data';
 
 const TableItem = ({ label, issues, deleteLabel, editLabel }) => {
   const [filteredIssues, setFilteredIssues] = useState([]);
@@ -16,7 +18,7 @@ const TableItem = ({ label, issues, deleteLabel, editLabel }) => {
   });
 
   useEffect(() => {
-    const item = issues.filter((issue) => {
+    const item = issuesData.filter((issue) => {
       const item =
         issue.labels &&
         issue.labels.some((item) => {
@@ -71,10 +73,12 @@ const TableItem = ({ label, issues, deleteLabel, editLabel }) => {
         </>
       )}
       {filteredIssues.length > 0 && (
-        <div style={{ cursor: 'pointer' }}>
-          <ExclamationCircleOutlined style={{ marginRight: '5px' }} />
-          {filteredIssues.length}
-        </div>
+        <NavLink to={'/issues/' + label.id}>
+          <div style={{ cursor: 'pointer' }}>
+            <ExclamationCircleOutlined style={{ marginRight: '5px' }} />
+            {filteredIssues.length}
+          </div>
+        </NavLink>
       )}
     </div>
   );

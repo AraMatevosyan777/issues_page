@@ -5,9 +5,12 @@ import TableItem from './TableItem';
 import { issueType } from '../../types';
 import PropTypes from 'prop-types';
 import Search from '../common/search';
+import { useParams, NavLink } from 'react-router-dom';
+import { CloseOutlined } from '@ant-design/icons';
 
 const IssuesTable = ({ issues }) => {
   const [searchValue, setSearchValue] = useState('');
+  const params = useParams();
 
   const searchingFor = (searchValue) => {
     return (issue) => {
@@ -30,6 +33,24 @@ const IssuesTable = ({ issues }) => {
           />
           {searchValue.length > 0 && (
             <Button onClick={() => setSearchValue('')}>Reset</Button>
+          )}
+          {params.label && (
+            <div>
+              <NavLink to="/issues">
+                <CloseOutlined
+                  // onClick={() => getIssues()}
+                  style={{
+                    color: 'white',
+                    backgroundColor: '#585858',
+                    padding: '3px',
+                    borderRadius: 5,
+                    cursor: 'pointer',
+                    marginRight: 5,
+                  }}
+                />
+              </NavLink>
+              clear labels filter
+            </div>
           )}
         </div>
       ),
